@@ -166,8 +166,8 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-MEDIA_URL = '/media/image/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '/media/image')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if ENVIRONMENT == 'production':
     SECURE_BROWSER_XSS_FILTER = True
