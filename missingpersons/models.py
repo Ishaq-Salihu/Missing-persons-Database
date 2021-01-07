@@ -59,7 +59,7 @@ class Missingperson(models.Model):
     lastseenat = models.CharField(max_length=250)
     description = models.TextField()
     image = models.ImageField(upload_to='image/')
-    uploaddate = models.DateTimeField(auto_now_add=True,null = True)
+    uploaddate = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return 'Missing ' + self.age + ' year old' + ' with name ' + self.Name + ', last seen at ' + self.lastseenat
