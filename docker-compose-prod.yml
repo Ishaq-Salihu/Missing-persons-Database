@@ -7,7 +7,7 @@ services:
     environment:
       - ENVIRONMENT=production
       - SECRET_KEY=^-a9g900u%as99&lh^sk_-ejv)&cde%38_9h70f1@8d5%s4ao6
-      - DEBUG=0
+      - DEBUG=1
 
     ports: 
       - 8000:8000
