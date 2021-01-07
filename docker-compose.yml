@@ -8,6 +8,7 @@ services:
     command: gunicorn mpd.wsgi -b 0.0.0.0:8000
     environment: 
       - ENVIRONMENT=development
+      - SECRET_KEY=^-a9g900u%as99&lh^sk_-ejv)&cde%38_9h70f1@8d5%s4ao6
     volumes: 
        - .:/code/mpdatabase
     ports: 
