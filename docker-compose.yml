@@ -5,7 +5,9 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    command: python /code/mpdatabase/manage.py runserver 0.0.0.0:8000
+    command: gunicorn mpd.wsgi -b 0.0.0.0:8000
+    environment: 
+      - ENVIRONMENT=development
     volumes: 
        - .:/code/mpdatabase
     ports: 

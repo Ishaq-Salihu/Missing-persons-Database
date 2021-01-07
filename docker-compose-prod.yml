@@ -1,0 +1,21 @@
+version: '3.7'
+
+services: 
+  web:
+    build: .
+    command: gunicorn mpd.wsgi -b 0.0.0.0:8000
+    environment:
+      - ENVIRONMENT=production
+      - SECRET_KEY=^-a9g900u%as99&lh^sk_-ejv)&cde%38_9h70f1@8d5%s4ao6
+      - DEBUG=0
+
+    ports: 
+      - 8000:8000
+    depends_on: 
+      - db
+  db:
+    image: postgres:11
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
