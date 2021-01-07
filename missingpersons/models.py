@@ -58,7 +58,7 @@ class Missingperson(models.Model):
     state = models.CharField(max_length=500,choices = STaTES)
     lastseenat = models.CharField(max_length=250)
     description = models.TextField()
-    image = models.ImageField(upload_to='media')
+    image = models.ImageField(upload_to='image/')
     uploaddate = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
