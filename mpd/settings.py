@@ -21,7 +21,6 @@ ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
 ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
 
@@ -45,6 +44,7 @@ INSTALLED_APPS = [
     'rest_auth.registration', 
     'rest_auth', 
     'corsheaders', 
+    'crispy_forms',
 
     # local apps
     'users.apps.UsersConfig',
@@ -107,6 +107,9 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+LOGIN_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT  = 'home'
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -164,9 +167,14 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+ACCOUNT_USERNAME_REQUIRED = False 
+ACCOUNT_AUTHENTICATION_METHOD = 'email' 
+ACCOUNT_EMAIL_REQUIRED = True 
+ACCOUNT_UNIQUE_EMAIL = True
 
 if ENVIRONMENT == 'production':
     SECURE_BROWSER_XSS_FILTER = True

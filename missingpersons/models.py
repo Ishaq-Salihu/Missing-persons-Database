@@ -1,5 +1,6 @@
 import uuid 
 from django.db import models
+from django.urls import reverse
 
 class Missingperson(models.Model):
     id = models.UUIDField(
@@ -64,3 +65,5 @@ class Missingperson(models.Model):
     def __str__(self):
         return 'Missing ' + self.age + ' year old' + ' with name ' + self.Name + ', last seen at ' + self.lastseenat
 
+    def get_absolute_url(self):
+        return reverse('missingdetails', args=[str(self.id)])

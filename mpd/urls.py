@@ -28,6 +28,4 @@ urlpatterns = [
     path('api/v1/rest-auth/registration/', include('rest_auth.registration.urls')),
     path('',include('missingpersons.urls'))
 
-] 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
