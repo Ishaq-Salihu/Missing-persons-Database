@@ -1,6 +1,7 @@
 import uuid 
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 class Missingperson(models.Model):
     id = models.UUIDField(
@@ -8,6 +9,14 @@ class Missingperson(models.Model):
         default=uuid.uuid4,
         editable=False)
 
+    Facial_Marks = (
+        ('Yes','Yes'),
+        ('No', 'No'),
+    )
+    Disabilities = (
+        ('Yes','Yes'),
+        ('No', 'No'),
+    )
     SEXCHOICES = (
         ('----','----'),
         ('M', 'Male'),
@@ -61,9 +70,16 @@ class Missingperson(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='image/')
     uploaddate = models.DateTimeField(auto_now_add=True)
-
+    facialmarks = models.CharField(max_length=500,choices = Facial_Marks)
+    disabilities = models.CharField(max_length=500,choices = Disabilities)
+    datelastseenat = models.DateField()
     def __str__(self):
         return 'Missing ' + self.age + ' year old' + ' with name ' + self.Name + ', last seen at ' + self.lastseenat
 
     def get_absolute_url(self):
         return reverse('missingdetails', args=[str(self.id)])
+
+class Comment(models.Model):
+    missing = models.ForeignKey(Missingperson, on_delete=models.CASCADE, related_name='comments')
+    comment = models.CharField(max_length=255)
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,)

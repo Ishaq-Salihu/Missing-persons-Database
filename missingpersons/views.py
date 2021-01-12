@@ -1,9 +1,10 @@
 from rest_framework import viewsets, permissions
-from .models import Missingperson
+from .models import Missingperson, Comment
 from .serializers import MissingSerializer
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.core.paginator import Paginator
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q 
 
 class MissingApiView(viewsets.ModelViewSet):
@@ -15,7 +16,7 @@ class MissingPersonListView(ListView):
     model = Missingperson
     paginate_by = 10
     queryset = Missingperson.objects.all()
-class MissingPersonCreateView(CreateView):
+class MissingPersonCreateView(LoginRequiredMixin, CreateView):
     model = Missingperson
     template_name = 'PostNew.html'
     fields = ('__all__')
@@ -29,3 +30,7 @@ class SearchResultsListView(ListView):
         query = self.request.GET.get('q')
         return Missingperson.objects.filter(
             Q(Name__icontains=query) )
+class CreateComment(LoginRequiredMixin,CreateView):
+    model = Comment
+    template_name = 'details.html'
+    fields = ('comment')
